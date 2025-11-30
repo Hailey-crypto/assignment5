@@ -2,6 +2,7 @@ import 'package:assignment4/ui/provider/todo_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:assignment4/core/app_theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tap_debouncer/tap_debouncer.dart';
 
 class TodoDetailPage extends ConsumerWidget {
   const TodoDetailPage({super.key, required this.id});
@@ -16,30 +17,31 @@ class TodoDetailPage extends ConsumerWidget {
       backgroundColor: vrc(context).background300,
       appBar: AppBar(
         backgroundColor: vrc(context).background200,
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: Icon(Icons.arrow_back_rounded),
-        ),
         actions: [
           // 즐겨찾기 버튼
-          InkWell(
-            onTap: () {
-              ref.read(todoViewModelProvider.notifier).toggleFavorite(todo);
-            },
-            child: Container(
-              margin: const EdgeInsets.only(right: 8),
-              width: 48,
-              height: 48,
-              child: Center(
-                child: Icon(
-                  todo.isFavorite
-                      ? Icons.star_rounded
-                      : Icons.star_border_rounded,
-                  size: 24,
-                  color: vrc(context).textColor200,
+          TapDebouncer(
+            onTap: () async => await ref
+                .read(todoViewModelProvider.notifier)
+                .toggleFavorite(todo),
+            builder: (BuildContext context, TapDebouncerFunc? onTap) {
+              return InkWell(
+                onTap: onTap,
+                child: Container(
+                  margin: const EdgeInsets.only(right: 8),
+                  width: 48,
+                  height: 48,
+                  child: Center(
+                    child: Icon(
+                      todo.isFavorite
+                          ? Icons.star_rounded
+                          : Icons.star_border_rounded,
+                      size: 24,
+                      color: vrc(context).textColor200,
+                    ),
+                  ),
                 ),
-              ),
-            ),
+              );
+            },
           ),
         ],
       ),

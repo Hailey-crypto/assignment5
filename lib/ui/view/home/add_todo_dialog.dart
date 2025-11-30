@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:assignment4/core/app_theme.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:tap_debouncer/tap_debouncer.dart';
 
 class AddTodoDialog extends HookConsumerWidget {
   const AddTodoDialog({super.key});
@@ -105,7 +106,7 @@ class AddTodoDialog extends HookConsumerWidget {
                 hintText: '세부정보 추가',
               ),
             ),
-          // 하단 버튼
+          // 하단 버튼 영역
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8),
             child: Row(
@@ -117,49 +118,71 @@ class AddTodoDialog extends HookConsumerWidget {
                   children: [
                     // 세부정보 버튼
                     if (!isDescriptionActivated.value)
-                      InkWell(
-                        onTap: () => isDescriptionActivated.value = true,
-                        child: SizedBox(
-                          width: 40,
-                          height: 40,
-                          child: Center(
-                            child: Icon(Icons.short_text_rounded, size: 24),
-                          ),
-                        ),
+                      TapDebouncer(
+                        onTap: () async => isDescriptionActivated.value = true,
+                        builder:
+                            (BuildContext context, TapDebouncerFunc? onTap) {
+                              return InkWell(
+                                onTap: onTap,
+                                child: SizedBox(
+                                  width: 40,
+                                  height: 40,
+                                  child: Center(
+                                    child: Icon(
+                                      Icons.short_text_rounded,
+                                      size: 24,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
                       ),
                     // 즐겨찾기 버튼
-                    InkWell(
-                      onTap: () => isFavorite.value = !isFavorite.value,
-                      child: SizedBox(
-                        width: 40,
-                        height: 40,
-                        child: Center(
-                          child: Icon(
-                            isFavorite.value
-                                ? Icons.star_rounded
-                                : Icons.star_border_rounded,
-                            size: 24,
+                    TapDebouncer(
+                      onTap: () async => isFavorite.value = !isFavorite.value,
+                      builder: (BuildContext context, TapDebouncerFunc? onTap) {
+                        return InkWell(
+                          onTap: onTap,
+                          child: SizedBox(
+                            width: 40,
+                            height: 40,
+                            child: Center(
+                              child: Icon(
+                                isFavorite.value
+                                    ? Icons.star_rounded
+                                    : Icons.star_border_rounded,
+                                size: 24,
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
+                        );
+                      },
                     ),
                   ],
                 ),
                 // 저장 버튼
-                InkWell(
-                  onTap: () => saveToDo(), // 저장 함수 실행
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                    child: Text(
-                      '저장',
-                      style: TextStyle(
-                        color: filled.value
-                            ? fxc(context).brandColor
-                            : vrc(context).textColor100,
-                        fontSize: 16,
+                TapDebouncer(
+                  onTap: () async => saveToDo(),
+                  builder: (BuildContext context, TapDebouncerFunc? onTap) {
+                    return InkWell(
+                      onTap: onTap,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 4,
+                        ),
+                        child: Text(
+                          '저장',
+                          style: TextStyle(
+                            color: filled.value
+                                ? fxc(context).brandColor
+                                : vrc(context).textColor100,
+                            fontSize: 16,
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
+                    );
+                  },
                 ),
               ],
             ),
