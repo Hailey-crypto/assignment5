@@ -17,6 +17,21 @@ class TodoDetailPage extends ConsumerWidget {
       backgroundColor: vrc(context).background300,
       appBar: AppBar(
         backgroundColor: vrc(context).background200,
+        scrolledUnderElevation: 0,
+        title: Hero(
+          tag: '${todo.id}',
+          child: Material(
+            color: Colors.transparent,
+            child: Text(
+              todo.title,
+              style: TextStyle(
+                color: vrc(context).textColor200,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
         actions: [
           // 즐겨찾기 버튼
           TapDebouncer(
@@ -45,42 +60,26 @@ class TodoDetailPage extends ConsumerWidget {
           ),
         ],
       ),
-      body: Container(
-        color: vrc(context).background300,
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
-        child: Column(
+        child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: 12,
           children: [
-            // 제목
-            Text(
-              todo.title,
-              style: TextStyle(
-                color: vrc(context).textColor200,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
+            Icon(
+              Icons.short_text_rounded,
+              size: 24,
+              color: vrc(context).textColor200,
             ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              spacing: 12,
-              children: [
-                Icon(
-                  Icons.short_text_rounded,
-                  size: 24,
+            // 세부정보
+            Expanded(
+              child: Text(
+                todo.description ?? '세부정보',
+                style: TextStyle(
                   color: vrc(context).textColor200,
+                  fontSize: 16,
                 ),
-                // 세부정보
-                Expanded(
-                  child: Text(
-                    todo.description ?? '세부정보 추가',
-                    style: TextStyle(
-                      color: vrc(context).textColor200,
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
           ],
         ),
