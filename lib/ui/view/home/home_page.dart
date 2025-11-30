@@ -1,15 +1,16 @@
 import 'package:assignment4/logic/entity/todo.dart';
 import 'package:assignment4/ui/provider/todo_provider.dart';
-import 'package:assignment4/ui/view/add_todo_dialog.dart';
-import 'package:assignment4/ui/view/no_todo.dart';
-import 'package:assignment4/ui/view/todo_view.dart';
+import 'package:assignment4/ui/view/home/add_todo_dialog.dart';
+import 'package:assignment4/ui/view/home/no_todo.dart';
+import 'package:assignment4/ui/view/home/todo_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:assignment4/core/app_theme.dart';
 
 class HomePage extends ConsumerWidget {
-  const HomePage({super.key, required this.title});
-  final String title;
+  const HomePage({super.key});
+
+  final String title = '혜린`s Tasks';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

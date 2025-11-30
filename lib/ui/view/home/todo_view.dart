@@ -1,10 +1,10 @@
 import 'package:assignment4/logic/entity/todo.dart';
 import 'package:assignment4/ui/provider/todo_provider.dart';
-import 'package:assignment4/ui/view/todo_detail_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:assignment4/core/app_theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class TodoView extends ConsumerWidget {
   const TodoView({super.key, required this.todo});
@@ -43,12 +43,7 @@ class TodoView extends ConsumerWidget {
           // 할 일 누르면 세부정보 페이지로 이동
           Expanded(
             child: InkWell(
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => TodoDetailPage(id: todo.id!),
-                ),
-              ),
+              onTap: () => context.go('/detail/${todo.id}'),
               child: Text(
                 todo.title,
                 style: TextStyle(
