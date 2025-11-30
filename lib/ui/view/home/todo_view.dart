@@ -53,14 +53,20 @@ class TodoView extends ConsumerWidget {
               builder: (BuildContext context, TapDebouncerFunc? onTap) {
                 return InkWell(
                   onTap: onTap,
-                  child: Text(
-                    todo.title,
-                    style: TextStyle(
-                      color: vrc(context).textColor200,
-                      fontSize: 16,
-                      decoration: todo.isDone
-                          ? TextDecoration.lineThrough
-                          : TextDecoration.none,
+                  child: Hero(
+                    tag: '${todo.id}',
+                    child: Material(
+                      color: Colors.transparent,
+                      child: Text(
+                        todo.title,
+                        style: TextStyle(
+                          color: vrc(context).textColor200,
+                          fontSize: 16,
+                          decoration: todo.isDone
+                              ? TextDecoration.lineThrough
+                              : TextDecoration.none,
+                        ),
+                      ),
                     ),
                   ),
                 );

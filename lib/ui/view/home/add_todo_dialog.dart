@@ -103,7 +103,7 @@ class AddTodoDialog extends HookConsumerWidget {
                     width: 2,
                   ),
                 ),
-                hintText: '세부정보 추가',
+                hintText: '세부정보',
               ),
             ),
           // 하단 버튼 영역
