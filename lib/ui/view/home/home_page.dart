@@ -6,6 +6,7 @@ import 'package:assignment4/ui/view/home/todo_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:assignment4/core/app_theme.dart';
+import 'package:tap_debouncer/tap_debouncer.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -44,20 +45,22 @@ class HomePage extends ConsumerWidget {
             ),
       // 할 일 추가 버튼
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      floatingActionButton: FloatingActionButton(
-        foregroundColor: Colors.white,
-        backgroundColor: fxc(context).brandColor,
-        shape: CircleBorder(),
-        onPressed: () {
-          showModalBottomSheet(
-            backgroundColor: vrc(context).background100,
-            isScrollControlled: true,
-            context: context,
-            builder: (context) => AddTodoDialog(),
+      floatingActionButton: TapDebouncer(
+        onTap: () async => await showModalBottomSheet(
+          backgroundColor: vrc(context).background100,
+          isScrollControlled: true,
+          context: context,
+          builder: (context) => AddTodoDialog(),
+        ),
+        builder: (BuildContext context, TapDebouncerFunc? onTap) {
+          return FloatingActionButton(
+            foregroundColor: Colors.white,
+            backgroundColor: fxc(context).brandColor,
+            shape: CircleBorder(),
+            onPressed: onTap,
+            child: const Icon(Icons.add_rounded, size: 24),
           );
         },
-        tooltip: 'Add Todo',
-        child: const Icon(Icons.add_rounded, size: 24),
       ),
     );
   }
