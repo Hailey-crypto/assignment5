@@ -10,5 +10,6 @@ abstract class Todo with _$Todo {
     String? description,
     required bool isFavorite,
     required bool isDone,
+    required DateTime createdAt,
   }) = _Todo;
 }

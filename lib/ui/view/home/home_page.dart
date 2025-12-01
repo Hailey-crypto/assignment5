@@ -33,18 +33,39 @@ class HomePage extends ConsumerWidget {
           ),
         ),
       ),
-      body: todos.isEmpty
-          ? NoTodo(title: title) // 할 일 있을 때 화면
-          : Container(
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-              child: ListView.builder(
-                itemCount: todos.length,
-                itemBuilder: (context, index) =>
-                    TodoView(todo: todos[index]), // 할 일 없을 때 화면
-              ),
-            ),
+      // 무한 스크롤
+      body: NotificationListener(
+        onNotification: (notification) {
+          if (notification is ScrollUpdateNotification) {
+            if (notification.metrics.pixels >=
+                notification.metrics.maxScrollExtent) {
+              ref.read(todoViewModelProvider.notifier).getMoreTodos();
+            }
+            return true; // 조건 충족 시 이벤트 처리
+          }
+          return false; //
+        },
+        // 당겨서 새로고침
+        child: RefreshIndicator(
+          color: fxc(context).brandColor,
+          backgroundColor: vrc(context).background200,
+          onRefresh: () => ref.read(todoViewModelProvider.notifier).getTodos(),
+          child: todos.isEmpty
+              ? NoTodo(title: title) // 할 일 있을 때 화면
+              : Container(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 8,
+                    horizontal: 12,
+                  ),
+                  child: ListView.builder(
+                    itemCount: todos.length,
+                    itemBuilder: (context, index) =>
+                        TodoView(todo: todos[index]), // 할 일 없을 때 화면
+                  ),
+                ),
+        ),
+      ),
       // 할 일 추가 버튼
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: TapDebouncer(
         onTap: () async => await showModalBottomSheet(
           backgroundColor: vrc(context).background100,

@@ -12,6 +12,7 @@ _TodoDto _$TodoDtoFromJson(Map<String, dynamic> json) => _TodoDto(
   description: json['description'] as String?,
   isFavorite: json['is_favorite'] as bool,
   isDone: json['is_done'] as bool,
+  createdAt: _convertToDateTime(json['created_at'] as String),
 );
 
 Map<String, dynamic> _$TodoDtoToJson(_TodoDto instance) => <String, dynamic>{
@@ -20,4 +21,5 @@ Map<String, dynamic> _$TodoDtoToJson(_TodoDto instance) => <String, dynamic>{
   'description': instance.description,
   'is_favorite': instance.isFavorite,
   'is_done': instance.isDone,
+  'created_at': _convertFromDateTime(instance.createdAt),
 };

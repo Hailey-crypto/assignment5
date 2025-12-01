@@ -16,6 +16,12 @@ class TodoRepositoryImpl implements TodoRepository {
   }
 
   @override
+  Future<List<Todo>> getMoreTodos(Todo lastTodo) async {
+    final dtos = await dataSource.getMoreTodos(entityToDto(lastTodo));
+    return dtos.map(dtoToEntity).toList();
+  }
+
+  @override
   Future<void> addTodo(Todo todo) async {
     await dataSource.addTodo(entityToDto(todo));
   }

@@ -44,6 +44,7 @@ class AddTodoDialog extends HookConsumerWidget {
                 description: description,
                 isFavorite: isFavorite.value,
                 isDone: false,
+                createdAt: DateTime.now(),
               ),
             );
         Navigator.of(context).pop();

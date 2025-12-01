@@ -7,9 +7,14 @@ class TodoUsecase {
 
   final TodoRepository repository;
 
-  // todo 전체 불러오기
+  // todo 리스트 처음 불러오기
   Future<List<Todo>> getTodos() async {
     return repository.getTodos();
+  }
+
+  // todo 리스트 추가로 불러오기
+  Future<List<Todo>> getMoreTodos(Todo lastTodo) async {
+    return repository.getMoreTodos(lastTodo);
   }
 
   // todo 추가
