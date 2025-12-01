@@ -24,6 +24,7 @@ class HomePage extends ConsumerWidget {
       appBar: AppBar(
         backgroundColor: vrc(context).background200,
         scrolledUnderElevation: 0,
+        centerTitle: true,
         title: Text(
           title,
           style: TextStyle(
@@ -53,11 +54,10 @@ class HomePage extends ConsumerWidget {
           child: todos.isEmpty
               ? NoTodo(title: title) // 할 일 있을 때 화면
               : Container(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 8,
-                    horizontal: 12,
-                  ),
-                  child: ListView.builder(
+                  padding: const EdgeInsets.all(12),
+                  child: ListView.separated(
+                    separatorBuilder: (BuildContext context, int index) =>
+                        SizedBox(height: 16),
                     itemCount: todos.length,
                     itemBuilder: (context, index) =>
                         TodoView(todo: todos[index]), // 할 일 없을 때 화면
