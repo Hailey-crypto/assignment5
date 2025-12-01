@@ -16,8 +16,10 @@ class TodoView extends ConsumerWidget {
     return Container(
       width: double.infinity,
       height: 50,
-      margin: const EdgeInsets.symmetric(vertical: 8),
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: EdgeInsets.symmetric(
+        // 반응형 UI (모바일 가로/세로 모드에 따라 여백 변경)
+        horizontal: MediaQuery.of(context).size.width >= 480 ? 50 : 16,
+      ),
       decoration: BoxDecoration(
         color: vrc(context).background200,
         borderRadius: BorderRadius.circular(12),
@@ -57,8 +59,11 @@ class TodoView extends ConsumerWidget {
                     tag: '${todo.id}',
                     child: Material(
                       color: Colors.transparent,
+                      // 제목
                       child: Text(
                         todo.title,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           color: vrc(context).textColor200,
                           fontSize: 16,

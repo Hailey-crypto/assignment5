@@ -79,6 +79,7 @@ class AddTodoDialog extends HookConsumerWidget {
           TextField(
             controller: titController,
             autofocus: true,
+            cursorColor: fxc(context).brandColor,
             decoration: InputDecoration(
               focusedBorder: UnderlineInputBorder(
                 borderSide: BorderSide(
@@ -97,6 +98,7 @@ class AddTodoDialog extends HookConsumerWidget {
               controller: desController,
               style: TextStyle(fontSize: 14),
               maxLines: 5,
+              cursorColor: fxc(context).brandColor,
               decoration: InputDecoration(
                 focusedBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
