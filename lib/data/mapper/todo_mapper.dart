@@ -11,6 +11,7 @@ Todo dtoToEntity(TodoDto dto) {
     description: dto.description,
     isFavorite: dto.isFavorite,
     isDone: dto.isDone,
+    createdAt: dto.createdAt,
   );
 }
 
@@ -22,5 +23,6 @@ TodoDto entityToDto(Todo entity) {
     description: entity.description,
     isFavorite: entity.isFavorite,
     isDone: entity.isDone,
+    createdAt: entity.createdAt,
   );
 }
