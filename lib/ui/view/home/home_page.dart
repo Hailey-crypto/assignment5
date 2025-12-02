@@ -44,7 +44,7 @@ class HomePage extends ConsumerWidget {
             }
             return true; // 조건 충족 시 이벤트 처리
           }
-          return false; //
+          return false;
         },
         // 당겨서 새로고침
         child: RefreshIndicator(

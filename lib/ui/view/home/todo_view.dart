@@ -17,7 +17,7 @@ class TodoView extends ConsumerWidget {
       width: double.infinity,
       height: 50,
       padding: EdgeInsets.symmetric(
-        // 반응형 UI (모바일 가로/세로 모드에 따라 여백 변경)
+        // 반응형 UI (모바일 가로/세로 모드에 따라 여백 변경 - dynamic island 등에 요소가 가려지지 않도록)
         horizontal: MediaQuery.of(context).size.width >= 480 ? 50 : 16,
       ),
       decoration: BoxDecoration(
@@ -49,6 +49,7 @@ class TodoView extends ConsumerWidget {
               builder: (BuildContext context, TapDebouncerFunc? onTap) {
                 return InkWell(
                   onTap: onTap,
+                  // 애니메이션 효과
                   child: Hero(
                     tag: '${todo.id}',
                     child: Material(

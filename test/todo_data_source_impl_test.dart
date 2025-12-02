@@ -3,7 +3,7 @@ import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:assignment4/data/data_source_impl/todo_data_source_impl.dart';
 import 'package:assignment4/data/dto/todo_dto.dart';
 
-// TodoDataSourceImpl : 메서드 + Firestore CRUD 테스트
+// TodoDataSourceImpl : Firestore CRUD 메서드 테스트
 void main() {
   late FakeFirebaseFirestore fakeFirestore;
   late TodoDataSourceImpl dataSource;

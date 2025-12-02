@@ -6,7 +6,7 @@ import 'package:assignment4/logic/entity/todo.dart';
 import 'package:assignment4/logic/usecase/todo_usecase.dart';
 import 'package:assignment4/ui/view_model/todo_view_model.dart';
 
-// TodoViewModel : 메서드 + 상태관리 테스트
+// TodoViewModel : 상태관리 메서드 테스트
 void main() {
   late FakeFirebaseFirestore fakeFirestore;
   late TodoDataSourceImpl dataSource;
@@ -22,7 +22,7 @@ void main() {
     viewModel = TodoViewModel(usecase);
   });
 
-  test('getTodos() : todo list 불러온 후 상태 없데이트 테스트', () async {
+  test('getTodos() : todo list 불러온 후 상태 업데이트 테스트', () async {
     final todo = Todo(
       id: '1',
       title: 'Test',

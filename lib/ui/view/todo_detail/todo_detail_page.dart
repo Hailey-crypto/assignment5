@@ -71,6 +71,7 @@ class TodoDetailPage extends HookConsumerWidget {
         scrolledUnderElevation: 0,
         centerTitle: true,
         actionsPadding: EdgeInsets.only(right: 5),
+        // 애니메이션 효과
         title: Hero(
           tag: '${todo.id}',
           child: Material(
@@ -106,7 +107,7 @@ class TodoDetailPage extends HookConsumerWidget {
           ),
         ),
         actions: [
-          // 수정 버튼
+          // 수정 버튼 (나만의 기능 추가 - To Do 수정 기능)
           TapDebouncer(
             onTap: () async {
               if (isEditing.value) {
@@ -145,7 +146,7 @@ class TodoDetailPage extends HookConsumerWidget {
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(
           vertical: 20,
-          // 반응형 UI (모바일 가로/세로 모드에 따라 여백 변경)
+          // 반응형 UI (모바일 가로/세로 모드에 따라 여백 변경 - dynamic island 등에 요소가 가려지지 않도록)
           horizontal: MediaQuery.of(context).size.width >= 480 ? 50 : 20,
         ),
         child: Row(
