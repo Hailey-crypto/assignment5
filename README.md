@@ -15,7 +15,7 @@ Just To Do
 > 해야 할 일들이 정리되지 않아 머릿속이 복잡한 분들
 > 
 
-> 간단하게 할 일 목록을 만들고, 완료하고, 삭제하고 싶은 분들
+> 간단하게 할 일 목록을 만들고, 수정하고, 완료하고, 삭제하고 싶은 분들
 > 
 
 > 복잡한 구조 없는 심플한 투두 리스트를 찾고 있는 분들
@@ -53,6 +53,8 @@ Just To Do
 |Firebase Core|Firebase 플랫폼 기반|
 |Firestore|NoSQL 실시간 데이터베이스|
 |Clean Architecture|의존성 역전, 도메인 중심 설계|
+
+<br/>
 
 ## 📖 라이브러리
 
@@ -109,6 +111,7 @@ lib/
              ㄴ to_do_view              : To Do 가 있을 때 화면에 띄우는 위젯
          ㄴ to_do_detail/
              ㄴ to_do_detail_page       : 세부 내용 페이지
+             
 test/       : 테스트 코드
 assets/     : 앱 내에서 사용된 이미지 파일
 README.md   : 프로젝트 설명 문서
