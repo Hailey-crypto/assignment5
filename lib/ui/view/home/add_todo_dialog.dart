@@ -11,7 +11,7 @@ class AddTodoDialog extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // (Flutter Hooks 로 지역 상태 관리)
+    // Flutter Hooks 로 지역 상태 관리
     final isFavorite = useState(false);
     final isDescriptionActivated = useState(false);
     final filled = useState(false);

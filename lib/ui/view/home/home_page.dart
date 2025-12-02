@@ -15,7 +15,7 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // TodoViewModel 구독 (RiverPod 으로 전역 상태 관리)
+    // TodoViewModel 구독
     final List<Todo> todos = ref.watch(todoViewModelProvider);
 
     return Scaffold(

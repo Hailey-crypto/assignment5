@@ -3,8 +3,7 @@ import 'package:assignment4/logic/repository/todo_repository.dart';
 
 // 비즈니스 로직 (todo 라는 기능으로 하나로 묶음)
 class TodoUsecase {
-  TodoUsecase(this.repository);
-
+  const TodoUsecase(this.repository); // 의존성 주입
   final TodoRepository repository;
 
   // todo 리스트 처음 불러오기

@@ -4,16 +4,15 @@ import 'package:flutter_riverpod/legacy.dart';
 
 // 상태관리
 class TodoViewModel extends StateNotifier<List<Todo>> {
+  TodoViewModel(this.usecase) // 의존성 주입
+    : super([]) {
+    getTodos();
+  }
   final TodoUsecase usecase;
 
   // 페이지네이션 상태
   bool isLoadingMore = false; // 페이지 로딩 중 여부
   bool hasMore = true; // 더 불러올 페이지 있는지 여부
-
-  // 상태(state) 초기값 = [], ViewModel 생성되면 바로 Todo 데이터를 가져옴
-  TodoViewModel(this.usecase) : super([]) {
-    getTodos();
-  }
 
   // todo 리스트 처음 불러오기
   Future<void> getTodos() async {
@@ -23,6 +22,7 @@ class TodoViewModel extends StateNotifier<List<Todo>> {
       hasMore = result.length == 15; // 더 불러올 페이지 있는지 확인
     } catch (e) {
       state = [];
+      print(e);
     }
   }
 
@@ -47,36 +47,59 @@ class TodoViewModel extends StateNotifier<List<Todo>> {
       isLoadingMore = false;
     } catch (e) {
       isLoadingMore = false;
+      print(e);
     }
   }
 
   // todo 추가
   Future<void> addTodo(Todo todo) async {
-    await usecase.addTodo(todo);
-    await getTodos();
+    state = [todo, ...state];
+    try {
+      await usecase.addTodo(todo);
+    } catch (e) {
+      print(e);
+    }
   }
 
   // todo 수정
   Future<void> updateTodo(Todo todo) async {
-    await usecase.updateTodo(todo);
-    await getTodos();
+    state = state.map((t) => t.id == todo.id ? todo : t).toList();
+    try {
+      await usecase.updateTodo(todo);
+    } catch (e) {
+      print(e);
+    }
   }
 
   // todo 삭제
   Future<void> deleteTodo(String id) async {
-    await usecase.deleteTodo(id);
-    await getTodos();
+    state = state.where((t) => t.id != id).toList();
+    try {
+      await usecase.deleteTodo(id);
+    } catch (e) {
+      print(e);
+    }
   }
 
   // 즐겨찾기 여부 변경
   Future<void> toggleFavorite(Todo todo) async {
-    await usecase.toggleFavorite(todo);
-    await getTodos();
+    final updated = todo.copyWith(isFavorite: !todo.isFavorite);
+    state = state.map((t) => t.id == todo.id ? updated : t).toList();
+    try {
+      await usecase.toggleFavorite(updated);
+    } catch (e) {
+      print(e);
+    }
   }
 
   // 완료 여부 변경
   Future<void> toggleDone(Todo todo) async {
-    await usecase.toggleDone(todo);
-    await getTodos();
+    final updated = todo.copyWith(isDone: !todo.isDone);
+    state = state.map((t) => t.id == todo.id ? updated : t).toList();
+    try {
+      await usecase.toggleDone(updated);
+    } catch (e) {
+      print(e);
+    }
   }
 }

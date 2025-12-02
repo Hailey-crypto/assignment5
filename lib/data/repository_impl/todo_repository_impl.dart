@@ -5,8 +5,7 @@ import 'package:assignment4/logic/repository/todo_repository.dart';
 
 // Dto - Entity 매핑
 class TodoRepositoryImpl implements TodoRepository {
-  TodoRepositoryImpl(this.dataSource);
-
+  const TodoRepositoryImpl(this.dataSource); // 의존성 주입
   final TodoDataSource dataSource;
 
   @override
