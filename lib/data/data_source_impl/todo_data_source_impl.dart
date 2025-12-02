@@ -2,7 +2,7 @@ import 'package:assignment4/data/data_source/todo_data_source.dart';
 import 'package:assignment4/data/dto/todo_dto.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-// Firestore 데이터 변환
+// Firestore 데이터 가공
 class TodoDataSourceImpl implements TodoDataSource {
   const TodoDataSourceImpl(this.firestore); // 의존성 주입 (외부로부터 firestore 주입)
   final FirebaseFirestore firestore;
