@@ -25,25 +25,19 @@ class TodoView extends ConsumerWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
-        spacing: 12,
+        spacing: 5,
         children: [
           // 완료 버튼
           TapDebouncer(
             onTap: () async =>
                 await ref.read(todoViewModelProvider.notifier).toggleDone(todo),
             builder: (BuildContext context, TapDebouncerFunc? onTap) {
-              return InkWell(
-                onTap: onTap,
-                child: SizedBox(
-                  width: 40,
-                  height: 40,
-                  child: Center(
-                    child: Icon(
-                      todo.isDone
-                          ? Icons.check_circle_rounded
-                          : Icons.circle_outlined,
-                    ),
-                  ),
+              return IconButton(
+                onPressed: onTap,
+                icon: Icon(
+                  todo.isDone
+                      ? Icons.check_circle_rounded
+                      : Icons.circle_outlined,
                 ),
               );
             },
@@ -84,18 +78,12 @@ class TodoView extends ConsumerWidget {
                 .read(todoViewModelProvider.notifier)
                 .toggleFavorite(todo),
             builder: (BuildContext context, TapDebouncerFunc? onTap) {
-              return InkWell(
-                onTap: onTap,
-                child: SizedBox(
-                  width: 40,
-                  height: 40,
-                  child: Center(
-                    child: Icon(
-                      todo.isFavorite
-                          ? Icons.star_rounded
-                          : Icons.star_border_rounded,
-                    ),
-                  ),
+              return IconButton(
+                onPressed: onTap,
+                icon: Icon(
+                  todo.isFavorite
+                      ? Icons.star_rounded
+                      : Icons.star_border_rounded,
                 ),
               );
             },
@@ -131,14 +119,7 @@ class TodoView extends ConsumerWidget {
               },
             ),
             builder: (BuildContext context, TapDebouncerFunc? onTap) {
-              return InkWell(
-                onTap: onTap,
-                child: SizedBox(
-                  width: 40,
-                  height: 40,
-                  child: Center(child: Icon(Icons.delete)),
-                ),
-              );
+              return IconButton(onPressed: onTap, icon: Icon(Icons.delete));
             },
           ),
         ],
