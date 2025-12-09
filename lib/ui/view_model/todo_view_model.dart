@@ -2,6 +2,8 @@ import 'package:assignment4/logic/entity/todo.dart';
 import 'package:assignment4/logic/usecase/todo_usecase.dart';
 import 'package:flutter_riverpod/legacy.dart';
 
+// 테스트 주석
+
 // 상태관리
 class TodoViewModel extends StateNotifier<List<Todo>> {
   TodoViewModel(this.usecase) // 의존성 주입
